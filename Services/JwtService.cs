@@ -1,0 +1,50 @@
+﻿using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
+using EmployeePortal.API.Models;
+using System.Security.Claims;
+
+namespace EmployeePortal.API.Services
+{
+    public class JwtService
+    {
+        private readonly IConfiguration _configuration;
+
+        public JwtService(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
+        public string GenerateToken(Employee employee)
+        {
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.Name, employee.Username),
+                new Claim(ClaimTypes.Role, employee.Role),
+                new Claim("EmployeeId", employee.Id.ToString())
+            };
+
+            var key = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(
+                    _configuration["Jwt:Key"]));
+
+            var credentials =
+                new SigningCredentials(
+                    key,
+                    SecurityAlgorithms.HmacSha256);
+
+            var token =
+                new JwtSecurityToken(
+                    issuer: _configuration["Jwt:Issuer"],
+                    audience: _configuration["Jwt:Audience"],
+                    claims: claims,
+                    expires: DateTime.UtcNow.AddMinutes(
+                        Convert.ToDouble(
+                            _configuration["Jwt:DurationInMinutes"])),
+                    signingCredentials: credentials);
+
+            return new JwtSecurityTokenHandler()
+                .WriteToken(token);
+        }
+    }
+}
