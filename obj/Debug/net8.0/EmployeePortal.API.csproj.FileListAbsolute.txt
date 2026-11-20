@@ -140,3 +140,4 @@ C:\Users\mvuyi\EmployeePortal.API\EmployeePortal.API\obj\Debug\net8.0\EmployeePo
 C:\Users\mvuyi\EmployeePortal.API\EmployeePortal.API\obj\Debug\net8.0\EmployeePortal.API.genruntimeconfig.cache
 C:\Users\mvuyi\EmployeePortal.API\EmployeePortal.API\obj\Debug\net8.0\ref\EmployeePortal.API.dll
 C:\Users\mvuyi\EmployeePortal.API\EmployeePortal.API\obj\Debug\net8.0\swae.build.ex.cache
+C:\Users\mvuyi\EmployeePortal.API\EmployeePortal.API\obj\Debug\net8.0\EmployeePortal.API.sourcelink.json
